@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container py-5">
+        <section class="pb-4">
+            <button class="btn btn-outline-primary" id="get_data">Get All User Details</button>
+        </section>
+        
+        <section class=" d-none" id="table">
+            <div class="form-floating mb-3 w-25">
+                <input id="myInput" class="form-control" type="text" placeholder="Search..">
+                <label for="user_id">Search...</label>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered text-center">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">User I'd</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user_data">                                         
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#get_data').click(function(){
+                //alert('success');
+                $.ajax({
+                    type: "get",
+                    dataType: "json",           
+                    url: "http://localhost/ajax/admin/listdata.php",
+                    success: function(response) {
+                        //console.log(response.length);
+                        //console.log(response);
+                        if(response.length > 0){
+                            $('#user_data').empty()
+                            $.each(response,function(key,value){
+                                $("#table").removeClass("d-none");
+                                $('#user_data').append("<tr><td>"+value.user_id+"</td><td>"+value.firstname+"</td><td>"+value.lastname+"</td><td>"+value.email+"</td><td><button class='btn btn-sm btn-primary me-2'>Update</button><button class='btn btn-sm btn-danger'>Delete</button></td></tr>");						
+                            })
+                        }else{                            
+                            // $('#user_data').append("<p class='text-center'>No Data Found</p>");
+                            $("#table").removeClass("d-none");
+                            $('#user_data').append("<tr><td class='text-center' colspan='4'>No Data Found</td></tr>");   
+                        }                
+                    }
+                });
+            });
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#user_data tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</body>
+</html>
