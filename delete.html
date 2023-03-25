@@ -26,28 +26,89 @@
             </div>
         </section>
         <section>
-            <form class="mx-auto w-50">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="user_id" placeholder="Enter User I'D">
-                    <label for="id" class="form-label">Enter User I'D</label>
-                </div>
-                <button type="button" id="get_by_id" class="btn btn-outline-primary">Delete User</button>
+            <form class="pb-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="user_id" placeholder="Enter User I'D">
+                            <label for="id" class="form-label">Enter User I'D</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button type="button" id="get_by_id" class="btn btn-outline-success">Get User Details</button>
+                        <button type="button" id="del_by_id" class="btn btn-outline-primary">Delete User</button>
+                    </div>
+                </div>               
             </form>
+        </section>
+        <section>  
+            <div class="text-center" id="no_record"></div>
+            <div class="table-responsive">
+                <table class="table table table-hover table-bordered text-center" id="table">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">User I'd</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="uid"></td>
+                            <td id="fname"></td>
+                            <td id="lname"></td>
+                            <td id="email"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </div>
     <script>
         $(document).ready(function(){
-            $("#get_by_id").click(function(){
-                //alert ("Button Clicked");       
+            $("#get_by_id").click(function () {
+                //alert ("Button Clicked");
                 input_id = $("#user_id").val();
+                console.log("id is " + input_id);
+                $.ajax({
+                    url: "http://localhost/ajax/admin/getdata.php",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        "get_id": input_id,
+                    },
+                    success: function (response) {
+                        // $("#user_data").empty();
+                        console.log(response);
+                        if (response.status == false) {
+                        $('#table').hide();
+                        $('#no_record').show().html("No Data Found");
+                        }
+                        else {
+                        $('#no_record').hide()
+                        $('#table').show()
+                        $('#uid').html(response.user_id)
+                        $('#fname').html(response.firstname)
+                        $('#lname').html(response.lastname)
+                        $('#email').html(response.email)
+                        }
+                    },
+                });
+            });
+
+            $("#del_by_id").click(function(){
+                //alert ("Button Clicked");       
+                //input_id = $("#user_id").val();
+                del_id = $('#uid').val();
                
-                console.log("id is " + input_id );
+                console.log("Delete id is " + del_id );
                 $.ajax({
                     url: "http://localhost/ajax/admin/delete.php",
                     type: "get",
                     dataType: "json",
                     data: {
-                        "get_id": input_id
+                        "delete_id": del_id
                     },
                     success: function(response) {                        
                         console.log(response); 

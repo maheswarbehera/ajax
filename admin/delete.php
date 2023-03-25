@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods
 // To delete in rest api, we use DELETE method
 //$data = json_decode(file_get_contents("php://input"), true);
 
-$user_id = $_GET['get_id'];
+$user_id = $_GET['delete_id'];
 
 include 'db.php';
 $sql = "delete from admin_user where user_id = '$user_id'";
