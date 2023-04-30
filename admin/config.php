@@ -5,10 +5,10 @@
     $database ="api";   
 
     //create connection
-    $con = mysqli_connect($servername, $username, $password, $database);
+    $conn = mysqli_connect($servername, $username, $password, $database);
 
     //check connection
-    if(!$con){
+    if(!$conn){
         die("Failed to Connect".mysqli_connect_error());
     }
     // else{

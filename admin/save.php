@@ -8,16 +8,22 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods
 // 1st allow us to set the method of insert. i.e. POST in rest api
 // 2nd determines which type of headers can be sent. It's a secuirty header.
 // 'Authorization' is set for authorizing insert data. While 'X-Requested-With' is set for passing data as json
+$data = json_decode(file_get_contents("php://input"), true);
 
-$fname = $_POST['firstname'];
-$lname = $_POST['lastname'];
-$email = $_POST['email'];
+$fname = $data['firstname'];
+$lname = $data['lastname'];
+$email = $data['email'];
 
-include 'db.php';
+// Ajax Form
+// $fname = $_POST['firstname'];
+// $lname = $_POST['lastname'];
+// $email = $_POST['email'];
 
-$sql = "insert into admin_user (firstname, lastname, email) values ('$fname', '$lname', '$email')";
+include 'config.php';
 
-if (mysqli_query($con, $sql)) {
+$sql = "INSERT INTO admin_user (firstname, lastname, email) VALUES ('$fname', '$lname', '$email')";
+
+if (mysqli_query($conn, $sql)) {
   echo json_encode(['msg' => 'User Inserted Successfully!', 'status' => true]);
 } else {
   echo json_encode(['msg' => 'User Failed to be Inserted!', 'status' => false]);

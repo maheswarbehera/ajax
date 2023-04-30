@@ -1,5 +1,5 @@
 <?php
-    include "db.php";
+    include "config.php";
 
     $type = 0;
     if(isset($_POST['type'])){
@@ -8,11 +8,11 @@
     
     // Search result
     if($type == 1){
-        $searchText = mysqli_real_escape_string($con,$_POST['search']);
+        $searchText = mysqli_real_escape_string($conn,$_POST['search']);
     
-        $sql = "SELECT user_id,firstname FROM admin_user where firstname like '%".$searchText."%' order by firstname asc limit 5";
+        $sql = "SELECT user_id, firstname FROM admin_user WHERE firstname like '%".$searchText."%' order by firstname asc limit 5";
     
-        $result = mysqli_query($con,$sql);
+        $result = mysqli_query($conn,$sql);
     
         $search_arr = array();
     
@@ -28,11 +28,11 @@
     
     // get User data
     if($type == 2){
-        $userid = mysqli_real_escape_string($con,$_POST['userid']);
+        $userid = mysqli_real_escape_string($conn,$_POST['userid']);
     
-        $sql = "SELECT user_id,firstname,lastname,email FROM admin_user where user_id=".$userid;
+        $sql = "SELECT user_id,firstname,lastname,email FROM admin_user WHERE user_id = $userid ";
     
-        $result = mysqli_query($con,$sql);
+        $result = mysqli_query($conn,$sql);
     
         $return_arr = array();
         while($fetch = mysqli_fetch_assoc($result)){

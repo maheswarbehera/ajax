@@ -2,10 +2,10 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-include 'db.php';
+include 'config.php';
 
-$sql = "select * from admin_user";
-$result = mysqli_query($con, $sql);
+$sql = "SELECT * FROM admin_user";
+$result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
   //mysqli_fetch_all gives us the data in 2D array format.

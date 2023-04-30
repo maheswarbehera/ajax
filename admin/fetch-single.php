@@ -7,15 +7,18 @@ header('Access-Control-Allow-Origin: *');
 // file_get_contents is reading file into a string. 
 // "php://input" is special key which insure that we can get any format of data. Even if its raw data.
 // True argument of json decode makes sure that we get response in assoc array
-//$data = json_decode(file_get_contents("php://input"), true);
+$data = json_decode(file_get_contents("php://input"), true);
 
 // we are getting our passed data in $data array. But to ensure securty we will change name of id to uid. Remember we are being requested data on basis of uid after all.
-$user_id = $_GET['get_id'];
+$user_id = $data['uid'];
 
-include 'db.php';
+// Ajax Form
+// $user_id = $_GET['get_id'];
 
-$sql = "select * from admin_user where user_id =".$user_id;
-$result = mysqli_query($con, $sql);
+include 'config.php';
+
+$sql = "SELECT * FROM admin_user WHERE user_id = $user_id";
+$result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
   //mysqli_fetch_all gives us the data in 2D array format.
