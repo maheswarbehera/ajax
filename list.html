@@ -46,7 +46,7 @@
                 $.ajax({
                     type: "get",
                     dataType: "json",           
-                    url: "http://localhost/ajax/admin/listdata.php",
+                    url: "http://localhost/ajax/api/fetch-all.php",
                     success: function(response) {
                         //console.log(response.length);
                         //console.log(response);
@@ -59,7 +59,7 @@
                         }else{                            
                             // $('#user_data').append("<p class='text-center'>No Data Found</p>");
                             $("#table").removeClass("d-none");
-                            $('#user_data').append("<tr><td class='text-center' colspan='4'>No Data Found</td></tr>");   
+                            $('#user_data').append("<tr><td class='text-center' colspan='4'>"+response.message+"</td></tr>");   
                         }                
                     }
                 });

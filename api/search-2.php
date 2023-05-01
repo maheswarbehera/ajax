@@ -10,7 +10,7 @@
     if($type == 1){
         $searchText = mysqli_real_escape_string($conn,$_POST['search']);
     
-        $sql = "SELECT user_id, firstname FROM admin_user WHERE firstname like '%".$searchText."%' order by firstname asc limit 5";
+        $sql = "SELECT user_id, firstname FROM admin WHERE firstname like '%".$searchText."%' order by firstname asc limit 5";
     
         $result = mysqli_query($conn,$sql);
     
@@ -30,7 +30,7 @@
     if($type == 2){
         $userid = mysqli_real_escape_string($conn,$_POST['userid']);
     
-        $sql = "SELECT user_id,firstname,lastname,email FROM admin_user WHERE user_id = $userid ";
+        $sql = "SELECT user_id,firstname,lastname,email FROM admin WHERE user_id = $userid ";
     
         $result = mysqli_query($conn,$sql);
     

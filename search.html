@@ -54,7 +54,7 @@
 
         if (search != "") {
           $.ajax({
-            url: "http://localhost/ajax/admin/getSearch.php",
+            url: "http://localhost/ajax/api/search-2.php",
             type: "post",
             data: { search: search, type: 1 },
             dataType: "json",
@@ -90,7 +90,7 @@
 
       // Request User Details
       $.ajax({
-        url: "http://localhost/ajax/admin/getSearch.php",
+        url: "http://localhost/ajax/api/search-2.php",
         type: "post",
         data: { userid: userid, type: 2 },
         dataType: "json",

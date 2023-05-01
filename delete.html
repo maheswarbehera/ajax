@@ -72,7 +72,7 @@
                 input_id = $("#user_id").val();
                 console.log("id is " + input_id);
                 $.ajax({
-                    url: "http://localhost/ajax/admin/getdata.php",
+                    url: "http://localhost/ajax/api/fetch-single.php",
                     type: "get",
                     dataType: "json",
                     data: {
@@ -104,7 +104,7 @@
                
                 console.log("Delete id is " + del_id );
                 $.ajax({
-                    url: "http://localhost/ajax/admin/delete.php",
+                    url: "http://localhost/ajax/api/delete.php",
                     type: "get",
                     dataType: "json",
                     data: {

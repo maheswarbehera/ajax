@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 
 include 'config.php';
 
-$sql = "SELECT * FROM admin_user";
+$sql = "SELECT * FROM `admin`";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -14,6 +14,6 @@ if (mysqli_num_rows($result) > 0) {
 
   echo json_encode($data);
 } else {
-  echo json_encode(['msg' => 'No User Data Found!', 'status' => false]);
+  echo json_encode(['message' => 'No User Data Found!', 'status' => false]);
 }
 ?>

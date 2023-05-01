@@ -13,12 +13,12 @@ $user_id = $data['uid'];
 // $user_id = $_GET['delete_id'];
 
 include 'config.php';
-$sql = "DELETE FROM admin_user WHERE user_id = '$user_id'";
+$sql = "DELETE FROM admin WHERE user_id = '$user_id'";
 
 if (mysqli_query($conn, $sql)) {
-  echo json_encode(['msg' => 'User Deleted Successfully!', 'status' => true]);
+  echo json_encode(['message' => 'User Deleted Successfully!', 'status' => true]);
 } else {
-  echo json_encode(['msg' => 'User Failed to be Deleted!', 'status' => false]);
+  echo json_encode(['message' => 'User Failed to be Deleted!', 'status' => false]);
 }
 
 ?>

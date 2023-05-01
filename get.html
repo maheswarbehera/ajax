@@ -52,7 +52,7 @@
         input_id = $("#user_id").val();
         console.log("id is " + input_id);
         $.ajax({
-          url: "http://localhost/ajax/admin/getdata.php",
+          url: "http://localhost/ajax/api/fetch-single.php",
           type: "get",
           dataType: "json",
           data: {

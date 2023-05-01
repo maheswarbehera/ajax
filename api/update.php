@@ -21,12 +21,12 @@ $email = $data['email'];
 
 include 'config.php';
 
-$sql = "UPDATE admin_user SET firstname = '$fname', lastname = '$lname', email = '$email' WHERE user_id = '$user_id'";
+$sql = "UPDATE admin SET firstname = '$fname', lastname = '$lname', email = '$email' WHERE user_id = '$user_id'";
 
 if (mysqli_query($conn, $sql)) {
-  echo json_encode(['msg' => 'User Updated Successfully!', 'status' => true]);
+  echo json_encode(['message' => 'User Updated Successfully!', 'status' => true]);
 } else {
-  echo json_encode(['msg' => 'User Failed to be Updated!', 'status' => false]);
+  echo json_encode(['message' => 'User Failed to be Updated!', 'status' => false]);
 }
 
 ?>

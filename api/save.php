@@ -21,11 +21,11 @@ $email = $data['email'];
 
 include 'config.php';
 
-$sql = "INSERT INTO admin_user (firstname, lastname, email) VALUES ('$fname', '$lname', '$email')";
+$sql = "INSERT INTO admin (firstname, lastname, email) VALUES ('$fname', '$lname', '$email')";
 
 if (mysqli_query($conn, $sql)) {
-  echo json_encode(['msg' => 'User Inserted Successfully!', 'status' => true]);
+  echo json_encode(['message' => 'User Inserted Successfully!', 'status' => true]);
 } else {
-  echo json_encode(['msg' => 'User Failed to be Inserted!', 'status' => false]);
+  echo json_encode(['message' => 'User Failed to be Inserted!', 'status' => false]);
 }
 ?>
